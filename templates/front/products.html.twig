@@ -1,0 +1,103 @@
+{% extends "front/base.html.twig" %}
+
+
+{% block main %}
+
+
+	<h1>Liste des Produits</h1>
+
+	<hr>
+
+	<div class="container">
+		{% for product in products %}
+			<div class="row">
+				<article>
+					{# path permet de rediriger vers une url grace au nom de la route et des paramètres de cette route si nécessaire #}
+					<center>
+						<a href="{{ path('ProductShow', {'id' : product.id}) }}">
+							<h1>
+								{{  product.name }}
+							</h1>
+						</a>
+					</center>
+					<center>
+						<h2>
+							{{  product.type.name }}
+						</h2>
+					</center>
+					<center>
+						<p>
+							{{ product.brand.name }}
+						</p>
+					</center>
+					<center>
+						<p>
+							{{ product.price }}
+							€
+						</p>
+					</center>
+
+					<center>
+						<a
+							href="{{ path("product_like", {'id' : product.id}) }}" class="btn btn-link js-likes">
+							{# app.user est la variable qui enregistre le user connecté #}
+							{% if app.user and product.isLikedByUser(app.user) %}
+								<i class="fas fa-thumbs-up"></i>
+								{#icon pouce rempli#}
+							{% else %}
+								<i class="far fa-thumbs-up"></i>
+								{# icon pouce vide#}
+							{% endif %}
+
+							<span class="js-likes">{{ product.likes | length }}</span>
+							<span class="js-label">J'aime</span>
+						</a>
+					</center>
+				</article>
+			</div>
+			<hr>
+		{% endfor %}
+	</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+function onClickLike(event){
+    event.preventDefault();
+
+    const url = this.href;
+    const spanCount = this.querySelector('span.js-likes');
+    const icone = this.querySelector('i');
+
+    axios.get(url).then(function (response){
+        spanCount.textContent = response.data.likes;
+
+        if(icone.classList.contains('fas')){
+            icone.classList.replace('fas', 'far');
+        } else{
+            icone.classList.replace('far', 'fas');
+        }
+    }).catch(function(error){
+        if(error.response.status == 403)
+        {
+            window.alert("Connexion requise")
+        }else {
+            window.alert("une erreur c'est produite");
+        }
+    });
+
+
+}
+
+document.querySelectorAll('a.js-likes').forEach(function (link){
+    link.addEventListener('click', onClickLike)
+})
+
+
+</script>
+
+{% endblock %}
+
+
+

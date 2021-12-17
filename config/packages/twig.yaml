@@ -1,0 +1,12 @@
+twig:
+  default_path: "%kernel.project_dir%/templates"
+
+  globals:
+    batman: "Batman"
+    gproducts: '@App\Globals\Products'
+    gtypes: '@App\Globals\Types'
+    gbrands: '@App\Globals\Brands'
+
+when@test:
+  twig:
+    strict_variables: true

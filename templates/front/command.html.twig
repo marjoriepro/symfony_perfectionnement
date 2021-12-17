@@ -1,0 +1,20 @@
+{% extends "front/base.html.twig" %}
+
+
+{% block main %}
+
+<center><div class="fluid">
+
+    <center><h1> {{  command.numberOrder}} </h1></center>
+     <center><h1> {{  command.price}} € </h1></center>
+    {% for product in command.products %}
+    <center> {{ product.name}} </center>
+    {% endfor %}
+   
+</div></center>
+
+
+
+{% endblock %}
+
+

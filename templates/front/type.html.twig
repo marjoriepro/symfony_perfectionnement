@@ -1,0 +1,19 @@
+{% extends "front/base.html.twig" %}
+
+
+{% block main %}
+<center><div class="fluid">
+    <center><h1> {{  type.name }} </h1></center>
+    <center><h2> {{  type.description }} </h2></center>
+    {% for product in type.products %}
+    
+    <center> <h4>{{ product.name}} </h4></center> 
+
+    {% endfor %}
+    
+</div></center>
+
+
+{% endblock %}
+
+

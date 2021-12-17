@@ -1,0 +1,22 @@
+{% extends "front/base.html.twig" %}
+
+
+{% block main %}
+<center><div class="fluid">
+    <center><h1> {{  product.name }} </h1></center>
+    <center><h2> {{  product.description }} </h2></center>
+    <center><p> {{  product.type.name }} </p></center>
+    <center><p> Marque: {{  product.brand.name }} </p></center>
+    <center><p> Prix: {{  product.price }} €</p></center>
+    <center><p> Produits en stock: {{  product.stock }} </p></center>
+    {% for image in product.media %}
+    <center><img src="{{ asset('media/' ~ image.src)}}" alt="{{ image.alt }}">
+
+{% endfor %}
+</div></center>
+
+
+
+{% endblock %}
+
+

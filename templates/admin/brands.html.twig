@@ -1,0 +1,25 @@
+
+{% extends "admin/base.html.twig" %}
+
+
+{% block main %}
+
+{{ batman }}
+
+     <h1>Liste des Marques</h1> 
+
+    <div class="container">
+        {% for brand in brands %}
+            <div class="row">
+                    {# path permet de rediriger vers une url grace au nom de la route et des paramètres de cette route si nécessaire #}
+                    <center><a href="{{ path('BrandShow', {'id' : brand.id}) }}"><h1> {{  brand.name }} </h1></a></center>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    {% for gproduct in gproducts.getAll %}
+        <h3>{{ gproduct.name }}</h3>
+    {% endfor %}
+
+{% endblock %}

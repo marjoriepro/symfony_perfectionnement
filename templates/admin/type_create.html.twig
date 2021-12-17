@@ -1,0 +1,14 @@
+{% extends "admin/base.html.twig" %}
+
+{% block main %}
+
+	{{ form_start(typeForm) }}
+
+	{{ form_label(typeForm.name, 'Nom') }}
+	{{ form_widget(typeForm.name) }}
+	{{ form_label(typeForm.description, 'Description') }}
+	{{ form_widget(typeForm.description) }}
+
+	{{ form_end(typeForm) }}
+
+{% endblock %}

@@ -1,0 +1,50 @@
+
+{% extends "admin/base.html.twig" %}
+
+
+{% block main %}
+
+    {% for message in app.flashes('notice') %}
+		{{ message }}
+	{% endfor %}
+
+    {{ batman}}
+
+    {% for gtype in gtypes.getAll %}
+        <h3>{{ gtype.name }}</h3>
+    {% endfor %}
+
+
+    <hr>
+
+    {% for gbrand in gbrands.getAll %}
+		<h3>{{ gbrand.name }}</h3>
+	{% endfor %}
+
+	<hr>
+
+     <h1>Liste des Produits</h1> 
+
+    <div class="container">
+        {% for product in products %}
+            <div class="row">
+                <article>
+                    {# path permet de rediriger vers une url grace au nom de la route et des paramètres de cette route si nécessaire #}
+                    <center><a href="{{ path('ProductShow', {'id' : product.id}) }}"><h1> {{  product.name }} </h1></a></center>
+                    <center><h2> {{  product.type.name }} </h2></center>
+                    <center><p> {{ product.brand.name }} </p></center>
+                    <center><p> {{ product.price }} € </p></center>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+	{% for gproduct in gproducts.getAll %}
+		<h3>{{ gproduct.name }}</h3>
+	{% endfor %}
+
+
+
+{% endblock %}
